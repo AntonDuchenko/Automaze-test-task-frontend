@@ -5,6 +5,7 @@ import SortImage from "../SortImage/SortImage";
 import TodoItem from "../TodoItem/TodoItem";
 import { useSearchParams } from "next/navigation";
 import { Todo } from "@/types/Todo";
+import SearchLink from "../SearchLink/SearchLink";
 
 interface Props {
   todos: Todo[];
@@ -27,16 +28,18 @@ export function TableTodos({ todos }: Props) {
           <th className="text-left">Title</th>
           <th className="text-left flex">
             Priority
-            <Link
-              href={{
-                query: {
-                  sort: sort === "priority" && order ? null : "priority",
-                  order: sort === "priority" && !order ? "desc" : null,
-                },
+            <SearchLink
+              params={{
+                sort: sort === "priority" && order ? null : "priority",
+                order: sort === "priority" && !order ? "desc" : null,
               }}
             >
               <SortImage colName={"Priority"} order={order} sort={sort} />
-            </Link>
+            </SearchLink>
+            {/* query: {
+                  sort: sort === "priority" && order ? null : "priority",
+                  order: sort === "priority" && !order ? "desc" : null,
+                }, */}
           </th>
         </tr>
       </thead>

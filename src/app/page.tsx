@@ -2,43 +2,42 @@
 
 import { Loader } from "@/components/Loader/Loader";
 import ModalToCreate from "@/components/ModalToCreate/ModalToCreate";
-import { TableTodos } from '@/components/TableTodos/TableTodos';
+import { TableTodos } from "@/components/TableTodos/TableTodos";
 import { useAppSelector } from "@/lib/hooks";
 import { Statuses } from "@/types/Statuses";
 import { filteredTodos } from "@/utils/filteredTodos";
-import debounce from "lodash.debounce";
-import { usePathname, useSearchParams } from "next/navigation";
+import { getSearchWith } from "@/utils/searchHepler";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 
 export default function Home() {
-  const [query, setQuery] = useState("");
-  const [status, setStatus] = useState("All");
   const searchParams = useSearchParams();
-  const pathname = usePathname();
+  const route = useRouter();
 
   const sort = searchParams.get("sort") || "";
   const order = searchParams.get("order") || "";
+  const query = searchParams.get("query") || "";
+  const status = searchParams.get("status") || "";
 
   const { todos, loading } = useAppSelector((state) => state.todos);
 
-  const preparedTodos = filteredTodos(todos, status, query, sort, order);
-
-  const debouncedSetSearchParams = debounce((value: string) => {
-    setQuery(value);
-
-    const newSearchParams = new URLSearchParams(searchParams);
-    newSearchParams.set("query", value);
-
-    return pathname + "?" + newSearchParams?.toString();
-  }, 1000);
-
   const handleOnSelect = (e: ChangeEvent<HTMLSelectElement>) => {
-    setStatus(e.target.value);
+    const newSearchParams = getSearchWith(searchParams, {
+      status: e.target.value || null,
+    });
+
+    route.push(`?${newSearchParams?.toString()}`);
   };
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    debouncedSetSearchParams(e.target.value);
+    const newSearchParams = getSearchWith(searchParams, {
+      query: e.target.value || null,
+    });
+
+    route.push(`?${newSearchParams?.toString()}`);
   };
+
+  const preparedTodos = filteredTodos(todos, status, query, sort, order);
 
   return (
     <main className="container m-auto mt-3">
@@ -56,6 +55,7 @@ export default function Home() {
         </select>
 
         <input
+          value={query}
           onChange={handleOnChange}
           type="text"
           placeholder="Search..."
@@ -63,11 +63,7 @@ export default function Home() {
         />
       </div>
 
-      {loading ? (
-        <Loader />
-      ) : (
-        <TableTodos todos={preparedTodos} />
-      )}
+      {loading ? <Loader /> : <TableTodos todos={preparedTodos} />}
 
       <ModalToCreate />
     </main>
