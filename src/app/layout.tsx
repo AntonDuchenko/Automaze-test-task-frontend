@@ -5,6 +5,7 @@ import Header from "@/components/Header/Header";
 import { TodoProvider } from "@/context/TodoContext";
 import StoreProvider from "./StoreProvider";
 import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 const inter = Roboto({ weight: ["400", "500", "700"], preload: false});
 
@@ -26,6 +27,7 @@ export default function RootLayout({
             <Header />
 
             {children}
+            <ToastContainer newestOnTop />
           </body>
         </html>
       </StoreProvider>

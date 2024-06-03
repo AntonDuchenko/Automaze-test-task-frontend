@@ -33,7 +33,7 @@ export default function TodoItem({ todo }: Props) {
       await updateTodo(id, !completed);
 
       dispatch(todoSilce.toggleTodo(id));
-      successNotification("Todo status changed!")
+      successNotification("Todo status changed!");
     } catch (error) {
       errorNotification(`${error}`);
     }

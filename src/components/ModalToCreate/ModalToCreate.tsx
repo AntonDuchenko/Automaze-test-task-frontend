@@ -4,8 +4,8 @@ import { createTodo } from "@/api/todos";
 import { TodoContext } from "@/context/TodoContext";
 import * as todoSilce from "@/lib/features/todoSilce";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { errorNotification } from '@/utils/errorNotification';
-import { successNotification } from '@/utils/successNotification';
+import { errorNotification } from "@/utils/errorNotification";
+import { successNotification } from "@/utils/successNotification";
 import classNames from "classnames";
 import { ChangeEvent, FormEvent, useContext, useState } from "react";
 
@@ -50,7 +50,7 @@ export default function ModalToCreate() {
         });
 
         dispatch(todoSilce.createTodo(newTodo));
-        successNotification(`Todo '${title}' created!`)
+        successNotification(`Todo '${title}' created!`);
 
         resetForm();
       } catch (error) {
@@ -66,16 +66,20 @@ export default function ModalToCreate() {
   return (
     <div
       className={classNames(
-        "h-screen w-screen bg-black/40 fixed flex justify-center items-center top-0 left-0 scale-0 transition-all duration-300",
+        "h-screen w-screen bg-black/40 fixed flex justify-center items-center top-0 left-0 opacity-0 pointer-events-none",
         {
-          "!scale-100": isModalActive,
+          "!opacity-100 !pointer-events-auto": isModalActive,
         }
       )}
     >
       <form
         onSubmit={handleOnSumbit}
         action="post"
-        className="flex w-[400px] h-[190px] flex-col justify-between items-center p-2 bg-white border-2 rounded-md"
+        className={classNames("flex w-[400px] h-[190px] flex-col justify-between items-center p-2 bg-white border-2 rounded-md scale-0 transition-all duration-300", 
+          {
+            "!scale-100": isModalActive,
+          }
+        )}
       >
         <div className="flex flex-col gap-2 w-full">
           <input
@@ -96,14 +100,15 @@ export default function ModalToCreate() {
             <option value={0} disabled>
               Choose priority
             </option>
-            <option value={1}>High</option>
+            <option value={1}>Low</option>
             <option value={2}>Medium</option>
-            <option value={3}>Low</option>
+            <option value={3}>High</option>
           </select>
         </div>
 
         <div className="flex w-full justify-between">
           <button
+            type="button"
             onClick={handleOnCancel}
             className="min-w-[49%] h-[40px] border-solid border-2 transition-all duration-300
     rounded-lg flex justify-center items-center font-semibold bg-slate-300 hover:bg-slate-500"
@@ -112,6 +117,7 @@ export default function ModalToCreate() {
           </button>
 
           <button
+            type="submit"
             className="min-w-[49%] h-[40px] border-solid border-2 transition-all duration-300
     rounded-lg flex justify-center items-center font-semibold hover:bg-slate-200"
           >
