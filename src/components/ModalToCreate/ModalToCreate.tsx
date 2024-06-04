@@ -24,7 +24,7 @@ export default function ModalToCreate() {
 
   const handleOnChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.trim()) {
-      setTitle(e.target.value.trim());
+      setTitle(e.target.value);
     }
   };
 
