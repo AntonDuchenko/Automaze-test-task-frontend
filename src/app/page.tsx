@@ -9,7 +9,7 @@ import { filteredTodos } from "@/utils/filteredTodos";
 import { getSearchWith } from "@/utils/searchHepler";
 import debounce from "lodash.debounce";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ChangeEvent, Suspense } from "react";
+import { ChangeEvent } from "react";
 
 export default function Home() {
   const searchParams = useSearchParams();
@@ -41,42 +41,32 @@ export default function Home() {
   const preparedTodos = filteredTodos(todos, status, query, sort, order);
 
   return (
-    <Suspense>
-      <main className="container m-auto mt-3">
-        <Suspense>
-          <div className="flex gap-2 h-[40px] mb-4">
-            <Suspense>
-              <select
-                onChange={handleOnSelect}
-                value={status}
-                name="fitler"
-                id="fitler"
-                className="w-[150px] border rounded-md p-2"
-              >
-                <option value={Statuses.All}>All</option>
-                <option value={Statuses.Completed}>Done</option>
-                <option value={Statuses.Active}>In Progress</option>
-              </select>
-            </Suspense>
+    <main className="container m-auto mt-3">
+      <div className="flex gap-2 h-[40px] mb-4">
+        <select
+          onChange={handleOnSelect}
+          value={status}
+          name="fitler"
+          id="fitler"
+          className="w-[150px] border rounded-md p-2"
+        >
+          <option value={Statuses.All}>All</option>
+          <option value={Statuses.Completed}>Done</option>
+          <option value={Statuses.Active}>In Progress</option>
+        </select>
 
-            <Suspense>
-              <input
-                defaultValue={query}
-                onChange={handleOnChange}
-                type="search"
-                placeholder="Search..."
-                className="border w-full rounded-md p-2"
-              />
-            </Suspense>
-          </div>
-        </Suspense>
+        <input
+          defaultValue={query}
+          onChange={handleOnChange}
+          type="search"
+          placeholder="Search..."
+          className="border w-full rounded-md p-2"
+        />
+      </div>
 
-        <Suspense>
-          {loading ? <Loader /> : <TableTodos todos={preparedTodos} />}
-        </Suspense>
+      {loading ? <Loader /> : <TableTodos todos={preparedTodos} />}
 
-        <ModalToCreate />
-      </main>
-    </Suspense>
+      <ModalToCreate />
+    </main>
   );
 }
