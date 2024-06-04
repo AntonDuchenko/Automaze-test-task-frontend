@@ -7,9 +7,9 @@ import StoreProvider from "./StoreProvider";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { Suspense } from "react";
-import { Loader } from '@/components/Loader/Loader';
+import { Loader } from "@/components/Loader/Loader";
 
-const inter = Roboto({ weight: ["400", "500", "700"], preload: false });
+const roboto = Roboto({ weight: ["400", "500", "700"], preload: false });
 
 export const metadata: Metadata = {
   title: "Todo app",
@@ -22,19 +22,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <Suspense fallback={<Loader />}>
-      <TodoProvider>
-        <StoreProvider>
-          <html lang="en">
-            <body className={inter.className}>
+    <html lang="en">
+      <body className={roboto.className}>
+        <Suspense fallback={<Loader />}>
+          <TodoProvider>
+            <StoreProvider>
               <Header />
 
               {children}
               <ToastContainer newestOnTop />
-            </body>
-          </html>
-        </StoreProvider>
-      </TodoProvider>
-    </Suspense>
+            </StoreProvider>
+          </TodoProvider>
+        </Suspense>
+      </body>
+    </html>
   );
 }

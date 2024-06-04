@@ -36,10 +36,6 @@ export function TableTodos({ todos }: Props) {
             >
               <SortImage colName={"Priority"} order={order} sort={sort} />
             </SearchLink>
-            {/* query: {
-                  sort: sort === "priority" && order ? null : "priority",
-                  order: sort === "priority" && !order ? "desc" : null,
-                }, */}
           </th>
         </tr>
       </thead>
