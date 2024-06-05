@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Todo List
 
-## Getting Started
+Todo List Hub is a dynamic and interactive todo list application built using Next.js, React, React-Toastify, Redux, Axios, and Lodash.debounce. This application allows users to load todos from a PostgreSQL database, add and delete todos, sort todos by priority, and filter them by completion status. It provides a seamless experience for managing tasks effectively.
 
-First, run the development server:
+## Features
+
+- **Load Todos**: Fetch todos from a PostgreSQL database to keep your task list up-to-date.
+- **Add and Delete Todos**: Easily add new todos and remove completed or unnecessary ones.
+- **Sort by Priority**: Organize your tasks by priority to focus on what matters most.
+- **Filter by Completed**: Filter your todo list to view completed tasks or tasks that are still pending.
+
+## Demo
+
+Check out the live demo [here](https://automaze-test-task-frontend.vercel.app/).
+
+## Tech Stack
+
+- **Next.js**: A React framework for server-side rendering and generating static websites.
+- **React**: A JavaScript library for building user interfaces.
+- **React-Toastify**: A library to add notifications to your app with ease.
+- **Redux**: A predictable state container for JavaScript apps.
+- **Axios**: A promise-based HTTP client for making HTTP requests.
+- **Lodash.debounce**: A method for debouncing function calls, useful for rate-limiting events.
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/AntonDuchenko/automaze-test-task-frontend
+```
+
+Navigate to the project directory:
+
+```bash
+cd automaze-test-task-frontend
+```
+
+Install the dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Usage
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Loading Todos**: Upon starting the application, todos will be loaded from the PostgreSQL database.
+- **Adding a Todo**: Navigate to the "Add Todo" section, input your task details, set the priority, and save the todo.
+- **Deleting a Todo**: Click on the delete icon next to the todo you wish to remove.
+- **Sorting by Priority**: Use the sort option to organize your todos based on their priority level.
+- **Filtering by Completed**: Toggle the filter to view only completed tasks or those that are still pending.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Contact
 
-## Learn More
+If you have any questions or feedback, feel free to reach out at [anton.duchenko2@gmail.com](mailto:anton.duchenko2@gmail.com).
 
-To learn more about Next.js, take a look at the following resources:
+Enjoy managing your tasks with Todo List!
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
